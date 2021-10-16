@@ -10,3 +10,10 @@ export const getName = async (lat,lng) =>{
     return res.json()
 
 }
+
+export const getNews = async () =>{
+    const res = await fetch(`https://newsdata.io/api/1/news?apikey=pub_178843846f811aab0a7c06a55fd20e1b6c80&q=social`)
+
+    return res.json()
+
+}

@@ -6,7 +6,7 @@ import { getName } from '../api/api';
 
 import mapStyle from '../styles/styles'
 
-export default function Map({setmodal}) {
+export default function Map({setmodal,setgetcountry}) {
 
   const [lat, setlat] = useState('')
   const [lng, setlng] = useState('')
@@ -24,7 +24,7 @@ export default function Map({setmodal}) {
     }else{
 
       // Get Country
-      console.log(data.results[1].country)
+      setgetcountry(data.results[1].country)
     }
 
 

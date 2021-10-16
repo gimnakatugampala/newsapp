@@ -1,7 +1,16 @@
 import React from 'react'
 import { StyleSheet, Text, View ,Modal ,Image ,ScrollView } from 'react-native'
 
-export default function News({modal,setmodal}) {
+
+
+export default function News({modal,setmodal,getcountry}) {
+
+      // Get News
+  fetch(`https://newsapi.org/v2/everything?q=${getcountry}&sortBy=publishedAt&apiKey=355eef6dce5742548948aaa93298bf09`)
+  .then(res => res.json())
+  .then(data => console.log(data.articles))
+
+
     return (
         <View>
             <Modal visible={modal} animationType="slide">
@@ -11,13 +20,16 @@ export default function News({modal,setmodal}) {
                     {/* Navbar */}
                     <View style={styles.newsNavbar}>
                     <Text style={styles.navbarTitle}>News</Text>
-                    <Text style={styles.navbarClose} onPress={() => setmodal(false)}>X</Text>
+                    <Text style={styles.navbarClose} onPress={() => {
+                        setmodal(false)
+                        }}>X</Text>
                     </View>
 
                     {/* News Content */}
                     <ScrollView>
-                    {/* {width:'100%',height:'60%',shadowColor: "#000",elevation: 3,borderTopLeftRadius:25,borderTopRightRadius:25} */}
-                    {/* {width:'100%',height:'50%',borderTopLeftRadius:25,borderTopRightRadius:25} */}
+
+
+
                     <View style={styles.card}>
                     <Image
                         style={{width:'100%',height:'100%',borderTopLeftRadius:25,borderTopRightRadius:25}}
