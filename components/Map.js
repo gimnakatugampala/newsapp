@@ -11,7 +11,23 @@ export default function Map() {
   const [lat, setlat] = useState('')
   const [lng, setlng] = useState('')
 
-  
+
+  getName(lat,lng)
+  .then(data => {
+
+    if(data.error == 'BAD_REQUEST'){
+      console.log('bad error')
+    }
+
+    if(data.results == undefined){
+      console.log('lag error')
+    }else{
+
+      console.log(data.results[1].country)
+    }
+
+
+  })
 
     return (
       <View style={styles.container}>
@@ -22,14 +38,7 @@ export default function Map() {
           setlat(e.nativeEvent.coordinate.latitude)
           setlng(e.nativeEvent.coordinate.longitude)
 
-            
-          console.log(lat)
-          console.log(lng)
-
-
-
-          getName(lat,lng)
-          .then(data => console.log(data))
+    
           }}
   
          />
