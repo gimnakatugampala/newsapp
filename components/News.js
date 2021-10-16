@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View ,Modal ,Image ,ScrollView } from 'react-native'
 
 
@@ -8,15 +8,20 @@ export default function News({modal,setmodal,getcountry}) {
 
     const [allnews, setallnews] = useState([])
 
-    if(getcountry !== ''){
+    useEffect(() => {
 
-        // Get News
-    fetch(`https://newsapi.org/v2/everything?q=${getcountry}&sortBy=publishedAt&apiKey=355eef6dce5742548948aaa93298bf09`)
-    .then(res => res.json())
-    .then(data => setallnews(data.articles))
-    }
+        if(getcountry !== ''){
+            // Get News
+        fetch(`https://newsapi.org/v2/everything?q=${getcountry}&sortBy=publishedAt&apiKey=582d2cd0a6a54c83b45858d4d3088a1e`)
+        .then(res => res.json())
+        .then(data => {setallnews(data.articles)    })
+        }
 
+     
+    }, [getcountry])
 
+    
+    console.log(allnews)
 
     return (
         <View>
@@ -36,7 +41,7 @@ export default function News({modal,setmodal,getcountry}) {
                     {/* News Content */}
                     <ScrollView>
 
-                    {allnews.length === 0 ?  <Image style={styles.loader} source={require('../assets/loading.gif')}  />
+                    {allnews.length === 0 || allnews === undefined ?  <Image style={styles.loader} source={require('../assets/loading.gif')}  />
                         : allnews.map((news,index) => (
                         <View style={styles.card} key={index}>
                         <Image
