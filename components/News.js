@@ -3,14 +3,19 @@ import { StyleSheet, Text, View ,Modal ,Image ,ScrollView } from 'react-native'
 
 
 
+
 export default function News({modal,setmodal,getcountry}) {
 
     const [allnews, setallnews] = useState([])
 
-      // Get News
-  fetch(`https://newsapi.org/v2/everything?q=${getcountry}&sortBy=publishedAt&apiKey=355eef6dce5742548948aaa93298bf09`)
-  .then(res => res.json())
-  .then(data => setallnews(data.articles))
+    if(getcountry !== ''){
+
+        // Get News
+    fetch(`https://newsapi.org/v2/everything?q=${getcountry}&sortBy=publishedAt&apiKey=355eef6dce5742548948aaa93298bf09`)
+    .then(res => res.json())
+    .then(data => setallnews(data.articles))
+    }
+
 
 
     return (
@@ -24,25 +29,25 @@ export default function News({modal,setmodal,getcountry}) {
                     <Text style={styles.navbarTitle}>News</Text>
                     <Text style={styles.navbarClose} onPress={() => {
                         setmodal(false)
+                        setallnews([])
                         }}>X</Text>
                     </View>
 
                     {/* News Content */}
                     <ScrollView>
 
-                    {allnews.map((news,index) => (
+                    {allnews.length === 0 ?  <Image style={styles.loader} source={require('../assets/loading.gif')}  />
+                        : allnews.map((news,index) => (
                         <View style={styles.card} key={index}>
                         <Image
-                                    style={{width:'100%',height:'100%',borderTopLeftRadius:25,borderTopRightRadius:25}}
-                                    source={{
-                                    uri: news.urlToImage,
-                                    }}
-                                />
-                                <View style={styles.cardContent}>
-                                <Text style={styles.title}>{news.title}</Text>
-                                <Text style={styles.date}>{news.publishedAt}</Text>
-                                </View>
-                                </View>
+                        style={{width:'100%',height:'100%',borderTopLeftRadius:25,borderTopRightRadius:25}}
+                        source={{
+                        uri: news.urlToImage,}} />
+                        <View style={styles.cardContent}>
+                        <Text style={styles.title}>{news.title}</Text>
+                        <Text style={styles.date}>{news.publishedAt}</Text>
+                        </View>
+                        </View>
 
                     ))}
                     
@@ -98,5 +103,11 @@ const styles = StyleSheet.create({
     date:{
         color:'grey'
     },
+    loader:{
+        flex:1,
+        justifyContent:'center',
+        alignContent:'center',
+        margin:40
+    }
     
 })
