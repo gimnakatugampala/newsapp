@@ -2,10 +2,16 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
 import MapView from 'react-native-maps';
+import { getName } from '../api/api';
 
 import mapStyle from '../styles/styles'
 
-export default function Map({setlat,setlng}) {
+export default function Map() {
+
+  const [lat, setlat] = useState('')
+  const [lng, setlng] = useState('')
+
+  
 
     return (
       <View style={styles.container}>
@@ -15,6 +21,15 @@ export default function Map({setlat,setlng}) {
          onPress={(e) => {
           setlat(e.nativeEvent.coordinate.latitude)
           setlng(e.nativeEvent.coordinate.longitude)
+
+            
+          console.log(lat)
+          console.log(lng)
+
+
+
+          getName(lat,lng)
+          .then(data => console.log(data))
           }}
   
          />

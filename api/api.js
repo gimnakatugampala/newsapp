@@ -1,5 +1,5 @@
 export const getName = async (lat,lng) =>{
-    const res = await fetch("https://trueway-geocoding.p.rapidapi.com/ReverseGeocode?location=37.7879493%2C-122.3961974&language=en", {
+    const res = await fetch(`https://trueway-geocoding.p.rapidapi.com/ReverseGeocode?location=${lat}%2C${lng}&language=en`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "trueway-geocoding.p.rapidapi.com",

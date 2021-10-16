@@ -4,24 +4,26 @@ import { StatusBar } from 'expo-status-bar';
 
 import Map from './components/Map';
 
-import { getName } from './api/api';
+
 
 export default function App() {
 
-  const [lat, setlat] = useState('')
-  const [lng, setlng] = useState('')
 
-  // // Get Country Name
-  // getName(lat,lng)
-  // .then(data => console.log(data))
+  const [getcountry, setgetcountry] = useState('')
 
-  console.log(lat)
-  console.log(lng)
+  
+  // if(lat !== null || lng !== null){
+  //   // Get Country Name
+  //   getName(lat,lng)
+  //   .then(data => console.log(data.results[0].country))
+
+
+  // }
 
   return (
     <>
     <StatusBar style="light" />
-    <Map setlat={setlat} setlng={setlng}  />
+    <Map   />
     </>
   );
 }
