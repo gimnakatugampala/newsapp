@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View ,Modal ,Image ,ScrollView } from 'react-native'
 
 
 
 export default function News({modal,setmodal,getcountry}) {
 
+    const [allnews, setallnews] = useState([])
+
       // Get News
   fetch(`https://newsapi.org/v2/everything?q=${getcountry}&sortBy=publishedAt&apiKey=355eef6dce5742548948aaa93298bf09`)
   .then(res => res.json())
-  .then(data => console.log(data.articles))
+  .then(data => setallnews(data.articles))
 
 
     return (
@@ -28,23 +30,21 @@ export default function News({modal,setmodal,getcountry}) {
                     {/* News Content */}
                     <ScrollView>
 
+                    {allnews.map((news,index) => (
+                        <View style={styles.card} key={index}>
+                        <Image
+                                    style={{width:'100%',height:'100%',borderTopLeftRadius:25,borderTopRightRadius:25}}
+                                    source={{
+                                    uri: news.urlToImage,
+                                    }}
+                                />
+                                <View style={styles.cardContent}>
+                                <Text style={styles.title}>{news.title}</Text>
+                                <Text style={styles.date}>{news.publishedAt}</Text>
+                                </View>
+                                </View>
 
-
-                    <View style={styles.card}>
-                    <Image
-                        style={{width:'100%',height:'100%',borderTopLeftRadius:25,borderTopRightRadius:25}}
-                        source={{
-                        uri: 'https://reactnative.dev/img/tiny_logo.png',
-                        }}
-                    />
-                    <View style={styles.cardContent}>
-                    <Text style={styles.title}>Text</Text>
-                    <Text style={styles.date}>2021-09-26</Text>
-                    </View>
-                    </View>
-
-                 
-
+                    ))}
                     
                     </ScrollView>
 
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     card:{
         margin:10,
         height:150,
-        marginBottom:100,
+        marginBottom:180,
         shadowColor: "#000",
         elevation: 3,
         borderTopLeftRadius:25,
