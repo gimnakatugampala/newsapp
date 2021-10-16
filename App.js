@@ -3,13 +3,14 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import Map from './components/Map';
-
+import News from './components/News';
 
 
 export default function App() {
 
 
   const [getcountry, setgetcountry] = useState('')
+  const [modal, setmodal] = useState(false)
 
   
   // if(lat !== null || lng !== null){
@@ -23,7 +24,8 @@ export default function App() {
   return (
     <>
     <StatusBar style="light" />
-    <Map   />
+    <News setmodal={setmodal} modal={modal} />
+    <Map  setmodal={setmodal} />
     </>
   );
 }

@@ -6,7 +6,7 @@ import { getName } from '../api/api';
 
 import mapStyle from '../styles/styles'
 
-export default function Map() {
+export default function Map({setmodal}) {
 
   const [lat, setlat] = useState('')
   const [lng, setlng] = useState('')
@@ -23,6 +23,7 @@ export default function Map() {
       console.log('lag error')
     }else{
 
+      // Get Country
       console.log(data.results[1].country)
     }
 
@@ -37,7 +38,7 @@ export default function Map() {
          onPress={(e) => {
           setlat(e.nativeEvent.coordinate.latitude)
           setlng(e.nativeEvent.coordinate.longitude)
-
+          setmodal(true)
     
           }}
   
